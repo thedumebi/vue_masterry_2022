@@ -280,7 +280,10 @@ export default {
   name: "App",
   components: {
     AppHeader,
-    AuthModal
+    AuthModal,
+  },
+  created() {
+    this.$store.dispatch("init_login");
   },
 };
 </script>

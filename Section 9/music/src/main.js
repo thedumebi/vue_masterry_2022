@@ -1,16 +1,24 @@
 import { createApp } from "vue";
 
-import "./assets/main.css";
 import App from "./App.vue";
 import store from "./store";
 import router from "./router";
-import "./assets/tailwind.css";
+import { auth } from "./includes/firebase";
 import VeeValidatePlugin from "./includes/validation";
 
-let app = createApp(App);
+import "./assets/main.css";
+import "./assets/tailwind.css";
 
-app.use(store);
-app.use(router);
-app.use(VeeValidatePlugin);
+let app;
 
-app.mount("#app");
+auth.onAuthStateChanged(() => {
+  if (!app) {
+    app = createApp(App);
+
+    app.use(store);
+    app.use(router);
+    app.use(VeeValidatePlugin);
+
+    app.mount("#app");
+  }
+});
