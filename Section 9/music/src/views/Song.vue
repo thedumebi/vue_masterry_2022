@@ -116,7 +116,7 @@ export default {
       });
     },
     isPlaying() {
-      return this.song.docID === this.currentSong.docID && this.playing;
+      return this.$route.params.id === this.currentSong.docID && this.playing;
     },
   },
   async created() {
@@ -185,12 +185,12 @@ export default {
       });
     },
     handlePausePlay() {
-      if (this.song.docID === this.currentSong.docID) {
+      if (this.$route.params.id === this.currentSong.docID) {
         this.toggleAudio();
         return;
       }
 
-      this.newSong(this.song);
+      this.newSong({ ...this.song, docID: this.$route.params.id });
     },
   },
   watch: {

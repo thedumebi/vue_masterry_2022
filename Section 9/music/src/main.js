@@ -4,10 +4,11 @@ import App from "./App.vue";
 import store from "./store";
 import router from "./router";
 import { auth } from "./includes/firebase";
+import Icon from "./directives/icon";
 import VeeValidatePlugin from "./includes/validation";
 
-import "./assets/main.css";
 import "./assets/tailwind.css";
+import "./assets/main.css";
 
 let app;
 
@@ -18,6 +19,7 @@ auth.onAuthStateChanged(() => {
     app.use(store);
     app.use(router);
     app.use(VeeValidatePlugin);
+    app.directive("icon", Icon);
 
     app.mount("#app");
   }
