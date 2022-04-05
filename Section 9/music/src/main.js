@@ -9,12 +9,13 @@ import VeeValidatePlugin from "./includes/validation";
 
 import "./assets/tailwind.css";
 import "./assets/main.css";
+import i18n from "./includes/i18n";
 
 let app;
 
 auth.onAuthStateChanged(() => {
   if (!app) {
-    app = createApp(App);
+    app = createApp(App).use(i18n);
 
     app.use(store);
     app.use(router);

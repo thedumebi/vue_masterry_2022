@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import { auth, usersCollection } from "@/includes/firebase";
 import { Howl } from "howler";
 import helper from "@/includes/helper";
+import i18n from "@/includes/i18n";
 
 export default createStore({
   state: {
@@ -13,6 +14,7 @@ export default createStore({
     seek: "00:00",
     duration: "00:00",
     playerProgress: "0%",
+    locale: i18n.global.locale,
   },
   getters: {
     // authModalShow: (state) => state.authModalShow,
@@ -42,6 +44,9 @@ export default createStore({
       state.seek = helper.formatTime(state.sound.seek());
       state.duration = helper.formatTime(state.sound.duration());
       state.playerProgress = `${(state.sound.seek() / state.sound.duration()) * 100}%`;
+    },
+    changeLocale(state, payload) {
+      state.locale = payload;
     },
   },
   actions: {
@@ -135,6 +140,10 @@ export default createStore({
       state.sound.once("seek", () => {
         dispatch("progress");
       });
+    },
+    changeLocale({ commit }, payload) {
+      commit("changeLocale", payload);
+      i18n.global.locale = payload;
     },
   },
   // modules: {

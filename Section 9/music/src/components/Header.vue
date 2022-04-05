@@ -31,21 +31,43 @@
             </li>
           </template>
         </ul>
+        <select
+          class="flex flex-row mt-1 ml-auto focus:outline-none rounded text-white bg-inherit"
+          v-model="locale"
+          @change="toggleLocale"
+        >
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <!-- <li>
+            <a href="#" class="px-2 text-white" @click.prevent="changeLocale">
+              {{ currentLocale }}
+            </a>
+          </li> -->
+        </select>
       </div>
     </nav>
   </header>
 </template>
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 
 export default {
   name: "Header",
+  data() {
+    return {
+      locale: this.$store.state.locale,
+    };
+  },
   computed: {
     ...mapState(["userLoggedIn"]),
+    currentLocale() {
+      return this.$i18n.locale === "fr" ? "French" : "English";
+    },
   },
   methods: {
     ...mapMutations(["toggleAuthModal"]),
+    ...mapActions(["changeLocale"]),
     // toggleAuthModal() {
     //   this.$store.commit("toggleAuthModal");
     // },
@@ -60,6 +82,10 @@ export default {
       if (this.$route.meta.requiresAuth) {
         this.$router.push({ name: "home" });
       }
+    },
+    toggleLocale() {
+      this.changeLocale(this.locale);
+      // this.$i18n.locale = this.$i18n.locale === "fr" ? "en" : "fr";
     },
   },
 };
