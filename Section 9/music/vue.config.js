@@ -1,4 +1,4 @@
-const { defineConfig } = require('@vue/cli-service');
+const { defineConfig } = require("@vue/cli-service");
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -12,6 +12,13 @@ module.exports = defineConfig({
       runtimeOnly: false,
       compositionOnly: true,
       fullInstall: true,
+    },
+  },
+  pwa: {
+    name: "Music App",
+    themeColor: "#ff5e3a",
+    manifestOptions: {
+      short_name: "Music",
     },
   },
 });
