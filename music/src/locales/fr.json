@@ -1,0 +1,15 @@
+{
+  "home": {
+    "listen": "Écoutez de la bonne musique!"
+  },
+  "manage": {
+    "my_songs": "Mes chansons"
+  },
+  "register": {
+    "accept": "",
+    "tos": ""
+  },
+  "song": {
+    "comment_count": ""
+  }
+}
