@@ -10,7 +10,7 @@
         <button
           type="button"
           class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none"
-          @click.prevent="handlePausePlay"
+          @click.prevent="handlePausePlay" id="play-button"
         >
           <i class="fa" :class="{ 'fa-play': !isPlaying, 'fa-pause': isPlaying }"></i>
         </button>
