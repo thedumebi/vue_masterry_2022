@@ -20,12 +20,12 @@ import {
   ref,
   reactive,
   toRefs,
-  watch,
-  computed,
   onBeforeMount,
   onMounted,
 } from "vue";
 import AppAlert from "@/components/Alert.vue";
+import { useNumber } from "./hooks/number";
+import { usePhrase } from "./hooks/phrase";
 
 export default {
   name: "App",
@@ -39,6 +39,7 @@ export default {
     onBeforeMount(() => {
       console.log("onBeforeMount()");
     });
+
     onMounted(() => {
       console.log("onMounted()");
 
@@ -46,15 +47,8 @@ export default {
         console.log("button clicked");
       });
 
-      alert.value.shout()
+      alert.value.shout();
     });
-    let num = ref(0);
-
-    function increment() {
-      num.value++;
-    }
-
-    const double = computed(() => num.value * 2);
 
     const user = reactive({
       name: "DMB",
@@ -65,17 +59,9 @@ export default {
       user.name = "Dumebi";
     }, 3000);
 
-    const phrase = ref("");
-    const reversedPhrase = ref("");
+    const { num, increment, double } = useNumber();
 
-    // watch([phrase, num], ([newVal], [oldVal]) => {
-    //   console.log({ newVal, oldVal });
-    //   reversedPhrase.value = phrase.value.split("").reverse().join("");
-    // });
-
-    watch(() => {
-      reversedPhrase.value = phrase.value.split("").reverse().join("");
-    });
+    const { phrase, reversedPhrase, num: phraseNum } = usePhrase();
 
     return {
       num,
@@ -86,7 +72,8 @@ export default {
       double,
       user,
       btn,
-      alert
+      alert,
+      phraseNum
     };
   },
 };
