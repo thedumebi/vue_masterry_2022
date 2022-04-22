@@ -26,7 +26,14 @@
 <script>
 export default {
   name: 'AppModal',
-  props: ['show'],
+  props: {
+    show: {
+      required: true,
+    },
+    scrollable: {
+      default: false,
+    },
+  },
   methods: {
     close() {
       this.$emit('hide');
@@ -44,12 +51,21 @@ export default {
     document.removeEventListener('keydown', this.handler);
   },
   watch: {
-    show(newVal) {
-      if (newVal) {
-        this.$nextTick(() => {
-          this.$refs.modal.focus();
-        });
-      }
+    show: {
+      immediate: true,
+      handler(newVal) {
+        if (newVal) {
+          this.$nextTick(() => {
+            this.$refs.modal.focus();
+          });
+        }
+
+        if (newVal && !this.scrollable) {
+          document.body.style.setProperty('overflow', 'hidden');
+        } else {
+          document.body.style.removeProperty('overflow');
+        }
+      },
     },
   },
 };
