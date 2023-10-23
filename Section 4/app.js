@@ -1,5 +1,5 @@
 let vm = Vue.createApp({
-  // template: ``,
+  // template: `{{ message }}`,
 });
 
 vm.component("hello", {

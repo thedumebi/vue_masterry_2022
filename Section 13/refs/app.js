@@ -4,4 +4,6 @@ const app = Vue.createApp({
   }),
 }).mount("#app");
 
-app.$refs.greeting.innerText = "Another Hello";
+setTimeout(() => {
+  app.$refs.greeting.innerText = "Another Hello";
+}, 3000);
